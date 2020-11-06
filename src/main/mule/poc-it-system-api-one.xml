@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ca803b12-7a29-4730-bf4a-ae310aca222e" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="poc-it-system-api-one-accounts" doc:id="84fc1a69-2a62-4482-901e-2f5025cfcc37" >
+		<http:listener doc:name="Listener" doc:id="285b0138-bbf5-439b-9d0d-b1889b72f1b0" config-ref="HTTP_Listener_config" path="/accounts"/>
+		<set-payload value='#[%dw 2.0
+output application/json
+---
+[{
+	"id": 1,
+	"email": "george.bluth@reqres.in",
+	"first_name": "George",
+	"last_name": "Bluth",
+	"avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/128.jpg"
+},{
+	"id": 2,
+	"email": "janet.weaver@reqres.in",
+	"first_name": "Janet",
+	"last_name": "Weaver",
+	"avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg"
+},{
+	"id": 3,
+	"email": "emma.wong@reqres.in",
+	"first_name": "Emma",
+	"last_name": "Wong",
+	"avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/olegpogodaev/128.jpg"
+},{
+	"id": 4,
+	"email": "eve.holt@reqres.in",
+	"first_name": "Eve",
+	"last_name": "Holt",
+	"avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/marcoramires/128.jpg"
+},{
+	"id": 5,
+	"email": "charles.morris@reqres.in",
+	"first_name": "Charles",
+	"last_name": "Morris",
+	"avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/stephenmoon/128.jpg"
+},{
+	"id": 6,
+	"email": "tracey.ramos@reqres.in",
+	"first_name": "Tracey",
+	"last_name": "Ramos",
+	"avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/bigmancho/128.jpg"
+}]]' doc:name="Set Payload" doc:id="5e45ed05-d9f0-44bf-9e33-cb7e1062a6e4" />
+	</flow>
+</mule>
